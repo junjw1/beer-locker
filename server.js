@@ -69,12 +69,34 @@ beersRoute.get(function(req, res){
 // '/beers/:beer_id'가 prefix인 새 라우트 생성. 
 var beerRoute = router.route('/beers/:beer_id');
 
+// GET을 위한 엔드포인트 '/api/beers/:beer_id' 만들기, 
 beerRoute.get(function(req, res){
     Beer.findById(req.params.beer_id, function(err, beer){
         if(err){
             res.send(err);
         }
         res.json(beer);
+    });
+});
+
+// PUT을 위한 엔드포인트 '/api/beers/:beer_id' 만들기
+beerRoute.put(function(req, res){
+    //특정 맥주를 찾기 위해 맥주모델 사용
+    Beer.findById(req.params.beer_id, function(err, beer){
+        if(err){
+            res.send(err);
+        }
+
+        //남은 맥주양 업데이트하기
+        beer.quantity = req.body.quantity;
+
+        //맥주 저장하고 에러 체크
+        beer.save(function(){
+            if(err){
+                res.send(err);
+            }
+            res.json(beer);
+        });
     });
 });
 
