@@ -28,6 +28,30 @@ router.get('/', function(req, res){
    res.json({ message: 'you are running dangerously low on beer!!!~!~~!!~' }); 
 });
 
+//prefix가 /beers인 새 라우트 생성. 
+var beersRoute = router.route('/beers');
+
+//POST를 위한 /api/beers 엔드포인트(endpoint) 생성.
+beersRoute.post(function(req, res){
+    //Beer모델의 새 인스턴스 생성
+    var beer = new Beer();
+
+    //POST 데이터로부터 온 맥주 속성들(beer properties)을 셋
+    beer.name = req.body.name;
+    beer.type = req.body.type;
+    beer.quantity = req.body.quantity;
+
+    //맥주를 저장하고 에러를 체크
+    beer.save(function(err){
+        if(err){
+            res.send(err);
+        }
+        res.json({message: 'beer added to the locker!!', data: beer});
+    });
+
+});
+
+
 // '/api'에 모든 우리 라우트들을 등록하자(register 무엇을 with 여기에)
 // 우리가 이전에 정의했던 라우트(routes)를 앱에 지정하자. prefix '/api'를 사용해서.
 // 모든 정의된 라우트(route)들이 '/api'로 prefix될 것라는 의미
@@ -37,4 +61,5 @@ app.use('/api', router);
 app.listen(port);
 
 console.log('insert beer on port ' + port);
+
 
