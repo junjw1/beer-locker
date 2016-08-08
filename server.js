@@ -1,15 +1,20 @@
 //필요한 패키지 가져오기. express를 우리 앱 내에서 쓸 수 있다.
 var express = require('express');
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
 var Beer = require('./models/beer');
 
 //beer-locker를 mongoDB에 연결하기
 mongoose.connect('mongodb://localhost:27017/beerlocker');
 
 
-//express 앱 생성. 우리 웹앱 컴포넌트의 메인 컴포넌트
+//'express 앱' 생성. 우리 웹앱 컴포넌트의 메인 컴포넌트
 //app으로 route를 정의하고 http연결을 듣기시작한다.
 var app = express();
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 //포트 지정하기
 var port = process.env.PORT || 3000;
