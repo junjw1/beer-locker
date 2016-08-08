@@ -100,6 +100,18 @@ beerRoute.put(function(req, res){
     });
 });
 
+// DELETE를 위한 엔드포인트 '/api/beers/:beer_id' 생성
+beerRoute.delete(function(req, res){
+    //mongoose의 function인 findByIdAndRemove로 찾고 삭제하자.
+    Beer.findByIdAndRemove(req.params.beer_id, function(err){
+        if(err){
+            res.send(err);
+        }
+        res.json({message: 'beer removed from the locker!!'});
+
+    });
+});
+
 // '/api'에 모든 우리 라우트들을 등록하자(register 무엇을 with 여기에)
 // 우리가 이전에 정의했던 라우트(routes)를 앱에 지정하자. prefix '/api'를 사용해서.
 // 모든 정의된 라우트(route)들이 '/api'로 prefix될 것라는 의미
