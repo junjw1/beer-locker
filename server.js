@@ -14,7 +14,7 @@ var router = express.Router();
 
 //라우트 생성. '/'을 위한 라우트를 만들고, 'json 객체(object)'를 리턴 
 router.get('/', function(req, res){
-   res.json({ message: 'you are running dangerously low on beer!' }); 
+   res.json({ message: 'you are running dangerously low on beer!!!~!~~!!~' }); 
 });
 
 // '/api'에 모든 우리 라우트들을 등록하자(register 무엇을 with 여기에)
