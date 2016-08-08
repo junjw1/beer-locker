@@ -1,6 +1,7 @@
 //필요한 패키지 가져오기. express를 우리 앱 내에서 쓸 수 있다.
 var express = require('express');
 var mongoose = require('mongoose');
+var Beer = require('./models/beer');
 
 //beer-locker를 mongoDB에 연결하기
 mongoose.connect('mongodb://localhost:27017/beerlocker');
