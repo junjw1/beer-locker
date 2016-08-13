@@ -3,6 +3,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var beerController = require('./controllers/beer');
+var userController = require('./controllers/user');
 
 //beer-locker를 mongoDB에 연결하기
 mongoose.connect('mongodb://localhost:27017/beerlocker');
@@ -32,6 +33,9 @@ router.route('/beers/:beer_id')
 .put(beerController.putBeer)
 .delete(beerController.deleteBeer);
 
+router.route('/users')
+.post(userController.postUsers)
+.get(userController.getUsers);
 
 // '/api'에 모든 우리 라우트들을 등록하자(register 무엇을 with 여기에)
 // 우리가 이전에 정의했던 라우트(routes)를 앱에 지정하자. prefix '/api'를 사용해서.
