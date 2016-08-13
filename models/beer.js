@@ -8,5 +8,5 @@ var BeerSchema = new mongoose.Schema({
     quantity: Number
 });
 
-//몽구즈 비어 모델을 수출(export) 
+//몽구즈 비어 모델을 수출(export). 모델 이름이 'Beer'
 module.exports = mongoose.model('Beer', BeerSchema);
