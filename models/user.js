@@ -3,7 +3,7 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 
-var userSchema = new mongoose.Schema({
+var UserSchema = new mongoose.Schema({
     username: {
         type: String,
         unique: true,
@@ -15,7 +15,7 @@ var userSchema = new mongoose.Schema({
     }
 });
 
-userSchema.pre('save', function(callback){
+UserSchema.pre('save', function(callback){
     var user = this;
     
     //만약 password가 바뀌지 않았다면 빠져나오기(breat out)
@@ -33,11 +33,11 @@ userSchema.pre('save', function(callback){
     });
 });
 
-userSchema.methods.verifyPassword = function(password, cb){
+UserSchema.methods.verifyPassword = function(password, cb){
     bcrypt.compare(password, this.password, function(err, isMatch){
         if(err) return cb(err);
         cb(null, isMatch);
     });
 };
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', UserSchema);
