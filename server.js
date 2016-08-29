@@ -24,6 +24,8 @@ app.use(passport.initialize());
 //포트 지정하기
 var port = process.env.PORT || 3000;
 
+app.use(passport.initialize());
+
 //express 라우터(router) 생성. 라우터는 하나의 작은 앱으로 생각할 수 있다.
 //모든 express앱은 내장된(builtin) 앱 라우터를 가지고 있다. 라우터는 미들웨어처럼 행동 
 var router = express.Router();
